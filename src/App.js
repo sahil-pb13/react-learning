@@ -14,6 +14,11 @@ class App extends React.Component {
 
   render() {
     const abc = 123;
+    const data = [
+      { key1: 'valuea1', key2: 'valuea2' },
+      { key1: 'valueb1', key2: 'valueb2' },
+      { key1: 'valuec1', key2: 'valuec2' }
+    ]
     return (
       <div>
         {//binding
@@ -21,33 +26,48 @@ class App extends React.Component {
         here is {abc}
         <p style={abc === 123 ? { 'color': 'red' } : { color: 'green' }}>this is para</p>
 
-
-        <input type="text" value={this.state.stateVar} name="stateVar" onChange={(e)=>{this.changeState(e)}} />
+        <table>
+          <tr>
+            <th>1</th>
+            <th>2</th>
+          </tr>
+          {
+            data.map((row, idx) => {
+              return (
+                <tr key={idx}>
+                  <td>{row.key1}</td>
+                  <td>{row.key2}</td>
+                </tr>
+              )
+            })
+          }
+        </table>
+        <input type="text" value={this.state.stateVar} name="stateVar" onChange={(e) => { this.changeState(e) }} />
 
         <button onClick={() => this.updateValue()}>update</button>
 
 
         {this.state.stateVar}
-        <hr/>
+        <hr />
         {
           abc === 234 ?
             <Header propName={this.state.stateVar} /> :
             <Child propName={abc} />
         }
-        <hr/>
+        <hr />
         <Footer propName="propValue" />
         <ClassChild1 />
       </div>
     )
   }
   updateValue = () => {
-    let value='';
+    let value = '';
     console.log(this.state.stateVar);
     if (this.state.stateVar === 'this is state var 1')
       value = 'new value';
     else
       value = 'this is state var 1';
-    this.setState({ stateVar: value});
+    this.setState({ stateVar: value });
   }
 
   changeState = (e) => {
