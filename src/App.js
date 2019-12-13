@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Child, { SubChild1, ClassChild1 } from './components/child1'
+import Api from './components/api'
 import { thisExpression } from '@babel/types';
 
 class App extends React.Component {
@@ -27,20 +28,24 @@ class App extends React.Component {
         <p style={abc === 123 ? { 'color': 'red' } : { color: 'green' }}>this is para</p>
 
         <table>
-          <tr>
-            <th>1</th>
-            <th>2</th>
-          </tr>
-          {
-            data.map((row, idx) => {
-              return (
-                <tr key={idx}>
-                  <td>{row.key1}</td>
-                  <td>{row.key2}</td>
-                </tr>
-              )
-            })
-          }
+          <thead>
+            <tr>
+              <th>1</th>
+              <th>2</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              data.map((row, idx) => {
+                return (
+                  <tr key={idx}>
+                    <td>{row.key1}</td>
+                    <td>{row.key2}</td>
+                  </tr>
+                )
+              })
+            }
+          </tbody>
         </table>
         <input type="text" value={this.state.stateVar} name="stateVar" onChange={(e) => { this.changeState(e) }} />
 
@@ -57,6 +62,10 @@ class App extends React.Component {
         <hr />
         <Footer propName="propValue" />
         <ClassChild1 />
+
+        <hr />
+
+        <Api propName="propVal" />
       </div>
     )
   }
